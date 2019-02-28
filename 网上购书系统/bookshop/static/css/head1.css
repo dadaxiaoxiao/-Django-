@@ -1,0 +1,27 @@
+
+body {
+    font-size: 12px;
+    color: #404040;
+    font-family: 'Microsoft YaHei';
+}
+#hd {
+    font: 12px 'Hiragino Sans GB',"simsun","Arial";
+    color: #646464;
+    min-width: 1200px;
+    background-color: #fff;
+}
+#hd .tools {
+    width: 100%;
+    background-color: #f9f9f9;
+    border-bottom: 1px solid #f2f2f2;
+    height: 34px;
+    line-height: 34px;
+    position: relative;
+    z-index: 10010;
+}
+.tools .ddnewhead_operate {
+    width: 1200px;
+    margin: 0 auto;
+    background-color: #f9f9f9;
+    height: 34px;
+}

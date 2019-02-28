@@ -1,0 +1,32 @@
+body{font-family:'Microsoft Yahei';font-size:12px;color:#666;}
+html,body{height:100%}
+/* 顶部样式 */
+.header_con{
+	background-color:#f7f7f7;
+	height:29px;
+	border-bottom:1px solid #dddddd
+}
+
+.header{
+	width:1200px;
+	height:29px;
+	margin:0 auto;
+}
+.welcome,.login_info,.login_btn,.user_link{
+	line-height:29px;
+}
+.login_info{
+	display:none;
+}
+.login_info em{color:#ff2832}
+
+.login_btn a,.user_link a{
+	color:#666;
+}
+.login_btn a:hover,.user_link a:hover{
+	color:#ff2832;
+}
+.login_btn span,.user_link span{
+	color:#cecece;
+	margin:0 10px;
+}

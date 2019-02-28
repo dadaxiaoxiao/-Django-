@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>收货地址</title>
+    <link rel="shortcut icon" href="/static/images/favicon.ico" type="image/x-icon">
+     <link rel="stylesheet" type="text/css" href="/static/css/base.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/base_1.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/address.css">
+     <link rel="stylesheet" type="text/css" href="/static/css/main.css">
+      <link rel="stylesheet" type="text/css" href="/static/css/reset.css">
+        <link rel="stylesheet" type="text/css" href="/static/css/foot.css">
+     <script type="text/javascript" src="../../static/js/jquery-3.3.1.js"></script>
+     <script type="text/javascript" src="../../static/js/ie6.js"></script>
+
+    {% comment %}<script type="text/javascript" src="../../static/js/city.js"></script>
+    <script type="text/javascript" src="../../static/js/method.js"></script>{% endcomment %}
+</head>
+
+<body>
+    <div class="header_con">
+		<div class="header">
+			<div class="welcome fl">欢迎来到图书商城</div>
+			<div class="fr">
+				<div class="login_btn fl">
+					{% if userinfo.islogin %}
+					欢迎您：<em>{{ userinfo.username }}</em>
+					<span>|</span>
+					<a href="{% url 'bUser :logout' %}">退出</a>
+					{% else %}
+					<a href="{% url 'bUser :login' %}">登录</a>
+					<span>|</span>
+					<a href="{% url 'bUser :register' %}">注册</a>
+					{% endif %}
+				</div>
+				<div class="user_link fl">
+					<span>|</span>
+					<a href="{% url 'bShop:showcart' %}">我的购物车</a>
+					<span>|</span>
+					<a href="{% url 'bShop:index' %}">首页</a>
+				</div>
+			</div>
+		</div>
+     </div>
+    <div class="mydang">
+        <div class="head">
+            <a class="logo" href="#">
+                <img src="../../static/images/logo.png" alt="">
+            </a>
+        </div>
+        <div class="my_left">
+            <div class="my_menu">
+                <h3 class="my_menu_title">
+                    <a href="#" id="J_myhomeBtn">我的当当</a>
+                </h3>
+                <dl>
+                    <dt id="class600" name="orders">我的交易</dt>
+                    <dd>
+                        <a href="#">我的订单</a>
+                    </dd>
+                    <dt id="class640" name="personalinformation">个人中心</dt>
+                    <dd>
+                        <a href="{% url "bUser :personalinfo" %}" id="a_personal">个人信息</a>
+                    </dd>
+                    <dd>
+                        <a href="{% url "bUser :eidtpwd" %}" id="a_eidpwd">修改密码</a>
+                    </dd>
+                    <dd>
+                        <a href="{% url "bUser :adress" %}" id="a_adress">收货地址</a>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+        <div class="my_main">
+            <div class="my_title">
+                <span class="title">收货地址管理</span>
+            </div>
+            <div class="address_list">
+                <h3>收货地址</h3>
+                <dl>
+                    <dt>当前地址：</dt>
+                    <dd>{{ address.curaddress }}</dd>
+                </dl>
+            </div>
+            <div class="shadow_box">
+                <div class="body">
+                     <form  id='reFrom' action=""  method="post">
+                         {% csrf_token %}
+                         <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                             <tr>
+                                 <td class="t">收件人：</td>
+                                 <td class="z_index2">
+                                     <input name="getname" id="getname" value="{{ address.getname}}"  type="text"  class="text">
+                                 </td>
+                             </tr>
+                             <tr>
+                            <tr>
+                                <td class="t">手机号：</td>
+                                <td class="z_index2">
+                                    <input name="getphone" id="getphone" value="{{ address.getphone}}" type="text"  class="text">
+                                </td>
+                             </tr>
+                            <tr>
+                                <td class="t">邮政编码:</td>
+                                 <td class="z_index2">
+                                 <input name="getcode" id="getcode" value="{{ address.getcode}}"  type="text"  class="text">
+                                </td>
+                            </tr>
+                             <tr>
+                                 <td class="t">收货地址:</td>
+                                <td class="z_index2" id="distpicker">
+                                        <!--省份选择-->
+                                        <select class="form-control" id="province"  name="province"   value="{{ address.province}}">
+
+                                        </select>
+                                        <!--城市选择-->
+                                        <select class="form-control" id="city"  name="city" value="{{ address.city }}" >
+
+                                        </select>
+                                        <!--县区选择-->
+                                        <select class="form-control" id="district" name="district" value="{{ address.district }}" >
+
+                                        </select>
+                                 </td>
+                             </tr>
+                             <tr>
+                                 <td class="t"></td>
+                                 <td class="z_index2">
+                                     <textarea name="adddetail" id="adddetail">{{ address.detail }}</textarea>
+                                 </td>
+                             </tr>
+                             <tr>
+                                 <td class="t"></td>
+                                 <td class="z_index2">
+                                     <input type="button" id="address_btn" value="提交" >
+{#                                     <input type="button" name="" value="提交" class="adrSubmit">#}
+                                 </td>
+                             </tr>
+                         </table>
+                     </form>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="footer_nav_box">
+            <div class="footer_nav">
+            <a href="#" target="_blank" rel="nofollow">公司简介</a>
+            <span class="sep">|</span>
+            <a href="#" target="_blank">诚聘英才</a>
+            <span class="sep">|</span>
+            <a href="#" target="_blank">手机当当</a>
+            <span class="sep">|</span>
+            <a href="#" target="_blank">网站联盟</a>
+            <span class="sep">|</span>
+            <a href="#" target="_blank">官方Blog</a>
+        </div>
+             <div class="footer_copyright">
+            <span>Copyright (C) 当当网 2004-2017, All Rights Reserved</span>
+        </div>
+
+            <!-- 有三个icon的时候加footer_icon2 -->
+{#            <div class="footer_icon footer_icon2" style="padding-left: 55px;">#}
+{#            <div class="validator"><a href="#" target="_blank" class="footer_img"><img src="../../static/images/validate.gif"></a></div>#}
+{#            <div class="validator"><a href="#" target="_blank" class="footer_img"><img src="../../static/images/validate.gif"></a></div>#}
+{#            <div class="validator"><a id="_pingansec_bottomimagesmall_brand" href="#"  target="_blank"><img src="../../static/images/validate.gif"></a></div>#}
+{#        </div>#}
+        <div class="clear"></div>
+    </div>
+    <script type="text/javascript" src="../../static/js/distpicker.data.js"></script>
+    <script type="text/javascript" src="../../static/js/distpicker.js"></script>
+    <script type="text/javascript" src="../../static/js/address.js"></script>
+
+
+</body>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="/static/images/favicon.ico" type="image/x-icon">
+     <link rel="stylesheet" type="text/css" href="/static/css/base.css">
+     <link rel="stylesheet" type="text/css" href="/static/css/foot.css">
+     <link rel="stylesheet" type="text/css" href="/static/css/login.css">
+{#      <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.slim.js"></script>#}
+    <script src="{% static 'admin/js/jquery.js' %}"></script>
+     <script src="{% static 'admin/js/html5.js' %}"></script>
+     <script src="{% static 'js/ie6.js' %}"></script>
+
+    <script type="text/javascript" src="../../static/js/login.js"></script>
+    <title>登陆 -- 当当网</title>
+    <script>
+        $(function () {
+
+            if({{ error_name }} == 1 ){
+                $('#login_username').html('用户名错误').show();
+                $('#txtUsername').val('{{ username }}');
+                $('#txtPassword').val('{{ password }}');
+
+            }
+            if({{ error_pwd }}== 1 ){
+                $('#login_password_error').html('密码错误').show();
+                $('#txtUsername').val('{{ username }}');
+                $('#txtPassword').val('{{ password }}');
+            }
+        });
+    </script>
+</head>
+<body>
+    <!--logo 部分-->
+    <div class="head">
+        <a class="logo" href="#">
+            <img src="../../static/images/logo1.png" alt="">
+        </a>
+    </div>
+    <div class="login_bg">
+        <div class="set_area">
+            <div class="wrap">
+                <div id="J_cheatProoTop" class="new_tip">
+                    <div>
+                        请勿设置与邮箱及其他网站相同的登录及支付密码，
+                        <a href="#">谨防诈骗</a>！
+                    </div>
+                </div>
+                <div id="J_loginDiv">
+                    <form  id="login_form" action="" method="post" autocomplete="off">
+                        {% csrf_token %}
+                        <div id="J_loginCoreWrap" class="infro">
+                            <p class="password_login">密码登陆</p>
+                            <!--用户名-->
+                            <div id="username_div"class="username">
+                                <span></span>
+                                <input class="user" id="txtUsername" name="txtUsername" type="text" autocomplete="off" maxlength="40" value="" tabindex="1" placeholder="请输入邮箱/昵称/手机号码">
+                            </div>
+
+                            <p id="user_mindstyle" class="tips">
+                                <span id="login_username" style="display: none;"></span>
+                            </p>
+
+                            <!--密码-->
+                            <div id="password_div"class="password">
+                                 <span></span>
+                                <input class="pass" id="txtPassword" name="txtPassword" type="password" maxlength="20" autocomplete="off" errordata="0" tabindex="2" placeholder="请填写长度为6-20个字符的密码">
+                            </div>
+                            <p id="password_mindstyle" class="tips">
+                                <span id="login_password_error" style="display: none;"></span>
+                            </p>
+
+                            <p class="auto_login">
+                                <a href="#">忘记密码</a>
+                                <input id="autologin" class="auto_box" name="autologin"type="checkbox"tabindex="7" checked="">
+                                <span class="safe" style="display: inline-block;">记住密码</span>
+                            </p>
+                            <p class="btn">
+                                <span id="submintLoginBtn" href="#">登陆</span>
+                            </p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer_nav_box">
+        <div class="footer_nav">
+            <a href="#" target="_blank" rel="nofollow">公司简介</a>
+            <span class="sep">|</span>
+            <a href="#" target="_blank">诚聘英才</a>
+            <span class="sep">|</span>
+            <a href="#" target="_blank">手机当当</a>
+            <span class="sep">|</span>
+            <a href="#" target="_blank">网站联盟</a>
+            <span class="sep">|</span>
+            <a href="#" target="_blank">官方Blog</a>
+        </div>
+        <div class="footer_copyright">
+            <span>Copyright (C) 当当网 2004-2017, All Rights Reserved</span>
+        </div>
+
+
+        <div class="clear"></div>
+    </div>
+</body>
+</html>

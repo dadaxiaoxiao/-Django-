@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+<head>
+
+   <title>后台管理系统</title>
+    <meta name="author" content="DeathGhost" />
+    <link rel="stylesheet" type="text/css" href="{% static 'admin/css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'admin/css/index.css' %}">
+    <script src="{% static 'admin/js/html5.js' %}"></script>
+    <script type="text/javascript" src="../../static/js/ie6.js"></script>
+
+    <!--[if lt IE 9]>
+    <script src="{% static 'admin/js/html5.js' %}"></script>
+    <![endif]-->
+
+    <!-- Toastr style -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/plugins/toastr/toastr.min.css' %}">
+    <!-- Gritter -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/plugins/toastr/toastr.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'admin/js/plugins/gritter/jquery.gritter.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/plugins/sweetalert/sweetalert.css' %}">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'admin/css/index.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'font-awesome/css/font-awesome.css' %}">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/animate.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/newstyle2.css' %}">
+</head>
+
+<body>
+
+<header>
+ <h1><img src="{% static 'admin/images/admin_logo.png' %}"/></h1>
+ <ul class="rt_nav">
+  <li><a href="{% url 'Admin:admin_index' %}" target="_blank" class="website_icon">站点首页</a></li>
+  <li><a href="{% url 'Admin:admin.logout' %}" class="quit_icon">安全退出</a></li>
+ </ul>
+</header>
+<!--aside nav-->
+<!--aside nav-->
+<aside class="lt_aside_nav content mCustomScrollbar">
+ <h2><a href="#">超级管理员：&nbsp;{{ userinfo.username }}</a></h2>
+ <ul>
+   <li>
+   <dl>
+    <!--当前链接则添加class:active-->
+    <dt>图片管理</dt>
+    <dd><a href="{% url 'Admin:imagemanage' %}"  >图片上传</a></dd>
+   </dl>
+  </li>
+  <li>
+   <dl>
+    <!--当前链接则添加class:active-->
+    <dt>商品管理</dt>
+    <dd><a href="{% url 'Admin:addproduct' %}">商品添加/修改</a></dd>
+    <dd><a href="{% url 'Admin:categorym' %}" class="active1">种类添加</a></dd>
+    <dd><a href="{% url 'Admin:product_list' %}">商品列表</a></dd>
+   </dl>
+  </li>
+  <li>
+   <dl>
+    <dt>订单管理</dt>
+    <dd><a href="#" >订单列表</a></dd>
+    <dd><a href="#">订单详情</a></dd>
+   </dl>
+  </li>
+
+  <li>
+   <p class="btm_infor">© YeQin 版权所有</p>
+  </li>
+ </ul>
+</aside>
+<section class="rt_wrap content mCustomScrollbar">
+    <div class="rt_content">
+     <div id="wrapper">
+         <div id="page-wrapper" class="gray-bg dashbard-1">
+            <div class="row wrapper border-bottom white-bg page-heading">
+                <div class="col-lg-9">
+                    <h2>类目管理</h2>
+                    <ol class="breadcrumb">
+                        <li>
+                            <a>商品种类管理</a>
+                        </li>
+
+                    </ol>
+                </div>
+            </div>
+            <div class="wrapper wrapper-content animated fadeInRight">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            {#                        隐藏表#}
+                            <div class="ibox-content">
+                                <div class="modal inmodal fade" id="myModal" tabindex="-1" role="dialog"
+                                     aria-hidden="true">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal"><span
+                                                        aria-hidden="true">&times;</span><span class="sr-only">关闭</span>
+                                                </button>
+                                                <h4 class="modal-title">新增图书种类</h4>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <label class="col-sm-2 control-label">图书种类名称</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" name="limitshow" required="" value=""  id="f-sec-type-text">
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-white" data-dismiss="modal">取消
+                                                </button>
+                                                <button type="button" class="btn btn-primary">保存</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <form method="post" class="form-horizontal" id="ishow-form">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">图书种类</label>
+                                        <div class="col-sm-10">
+                                           <select class="form-control m-b f-sec-type" name="f-sec-type">
+            	                                {% for category in categorys %}
+            	                                <option value="{{category.cid}}">{{category.kind}}</option>
+                                                {% endfor %}
+                                             </select>
+                                        </div>
+                                        <div class="col-sm-4 col-sm-offset-2">
+                                            <input class="btn btn-primary new-ishow" type="button" value="新增图书种类" data-toggle="modal"
+                                            data-target="#myModal">
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+                            {#       列表#}
+                            <div class="ibox-content">
+                                <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="8">
+                                    <thead>
+                                    <tr>
+                                        <th>序号</th>
+                                        <th>图书种类</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for category in categorys %}
+                                        <tr cid="{{ category.cid  }}">
+                                            <td>{{ forloop.counter }}</td>
+                                            <td>{{ category.kind }}</td>
+                                            <td><i class="fa fa-trash"></i></td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+ </div>
+</section>
+
+
+
+
+
+
+
+
+<!-- Mainly scripts -->
+
+<script src="{% static 'js2/jquery-2.1.1.js' %}" type="text/javascript"></script>
+<script src="{% static 'js2/bootstrap.js' %}" type="text/javascript"></script>
+<script src="{% static 'js2/jquery.metisMenu.js' %}" type="text/javascript"></script>
+<script src="{% static 'js2/jquery.slimscroll.min.js' %}" type="text/javascript"></script>
+
+
+<!-- Flot -->
+<script src="{% static 'admin/js/plugins/flot/jquery.flot.js' %}" type="text/javascript"></script>
+<script src="{% static 'admin/js/plugins/flot/jquery.flot.tooltip.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'admin/js/plugins/flot/jquery.flot.spline.js' %}" type="text/javascript"></script>
+<script src="{% static 'admin/js/plugins/flot/jquery.flot.resize.js' %}" type="text/javascript"></script>
+<script src="{% static 'admin/js/plugins/flot/jquery.flot.pie.js' %}" type="text/javascript"></script>
+
+<!-- Peity -->
+<script src="{% static 'admin/js/plugins/peity/jquery.peity.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'admin/js/demo/peity-demo.js' %}" type="text/javascript"></script>
+
+
+<!-- Custom and plugin javascript -->
+<script src="{% static 'js2/inspinia.js' %}" type="text/javascript"></script>
+<script src="{% static 'js2/pace.min.js' %}" type="text/javascript"></script>
+
+<!-- jQuery UI -->
+<script src="{% static 'admin/js/plugins/jquery-ui/jquery-ui.min.js' %}" type="text/javascript"></script>
+
+<!-- GITTER -->
+<script src="{% static 'admin/js/plugins/gritter/jquery.gritter.min.js' %}" type="text/javascript"></script>
+
+<!-- Sparkline -->
+<script src="{% static 'admin/js/plugins/sparkline/jquery.sparkline.min.js' %}" type="text/javascript"></script>
+
+
+<!-- Sparkline demo data  -->
+<script src="{% static 'admin/js/demo/sparkline-demo.js' %}" type="text/javascript"></script>
+
+
+<!-- ChartJS-->
+<script src="{% static 'admin/js/plugins/chartJs/Chart.min.js' %}" type="text/javascript"></script>
+
+<!-- Toastr -->
+<script src="{% static 'admin/js/plugins/toastr/toastr.min.js' %}" type="text/javascript"></script>
+
+<!-- FooTable -->
+
+<script src="{% static 'admin/js/plugins/footable/footable.all.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'admin/js/plugins/sweetalert/sweetalert.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'admin/js/categorym.js' %}" type="text/javascript"></script>
+
+
+
+</body>
+</html>

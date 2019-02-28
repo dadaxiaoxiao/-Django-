@@ -1,0 +1,137 @@
+.my_main {
+    width: 990px;
+    padding: 0 0 0 10px;
+    height: 600px;
+    float: left;
+    display: block;
+}
+.my_title {
+    height: 48px;
+    line-height: 48px;
+    background: #fafafa;
+    border: 1px solid #dcdcdc;
+    overflow: hidden;
+}
+.my_title .title {
+    margin: 15px 0 15px 10px;
+    padding: 0 0 0 10px;
+    font-size: 16px;
+    color: #323232;
+    line-height: 18px;
+    border-left: 2px solid #ff2832;
+    display: inline-block;
+}
+.address_list {
+    border: 1px solid #d9d9d9;
+    border-top: none 0;
+    padding: 30px 0 60px 25px;
+    margin-bottom: 20px;
+    width: 900px;
+    height: 50px;
+}
+.address_list h3{
+    font-size: 15px;
+}
+.address_list dl{
+    margin: 8px 0;
+    line-height: 16px;
+    font-size: 12px;
+    padding-left: 27px;
+}
+.address_list dl dt{
+    color: #969696;
+    font-size: 14px;
+    padding-top: 10px;
+}
+.address_list dl dd{
+    color: #969696;
+    padding-top: 18px;
+    padding-left: 28px;
+    font-size: 14px;
+}
+.shadow_box {
+
+    width: 1410px;
+    height: 700px;
+    margin-bottom: 10px;
+    position: relative;
+    display: block;
+}
+.shadow_box .body{
+    display: block;
+    position: relative;
+    width: 700px;
+    height: 600px;
+    top: 40px;
+    left: 80px;
+
+}
+.shadow_box table{
+    top: 10px;
+    position: relative;
+}
+
+
+.shadow_box table .t {
+    font-size: 14px;
+    width: 100px;
+    padding-right: 10px;
+    text-align: right;
+    vertical-align: top;
+    color: #646464;
+    padding-top: 8px;
+    font-family: 'Microsoft YaHei';
+    line-height: 24px;
+}
+.shadow_box table .tips {
+    font-size: 14px;
+    width: 300px;
+    padding-right: 10px;
+    text-align: left;
+    vertical-align: top;
+    color: #ff2832;
+    padding-top: 8px;
+    font-family: 'Microsoft YaHei';
+    line-height: 24px;
+}
+.shadow_box .text1 {
+    border: 1px solid #e6e6e6;
+    font-family: 'Microsoft YaHei';
+    height: 15px;
+    float: left;
+    width: 300px;
+    margin-right: 10px;
+    padding: 9px 10px;
+    line-height: 18px;
+    outline: 0 none;
+    border-radius: 2px;
+    color: #333;
+}
+.shadow_box table td {
+    padding: 0 0 30px;
+    position: relative;
+}
+
+
+table #adddetail{
+    width: 310px;
+    height: 100px;
+    font-family: monospace;
+    border-color: rgb(169, 169, 169);
+}
+
+
+.shadow_box #address_btn {
+    display: inline-block;
+    font-size: 17px;
+    border: 0;
+    width: 60px;
+    height: 30px;
+    line-height: 30px;
+    cursor: pointer;
+    text-align: center;
+    background-color: #ff2832;
+    color: #fff;
+    border-radius: 10px;
+    margin-left: 50px;
+}

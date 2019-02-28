@@ -1,0 +1,17 @@
+body, button, ul, li, ol, p,
+dl, dd, h1, h2, h3, h4, h5,
+h6, img, iframe, form, input {
+    margin: 0;
+    padding: 0;
+    list-style-type: none; border: 0;
+
+}
+a {
+    text-decoration: none;
+}
+img{
+    border: none;
+}
+body {
+    background: #ffffff;
+}

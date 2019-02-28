@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/main.css">
+        <link rel="stylesheet" type="text/css" href="/static/css/detail.css">
+       <link rel="stylesheet" type="text/css" href="/static/css/foot.css">
+     <link rel="stylesheet" type="text/css" href="/static/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/foot.css">
+    {% comment %}<script type="text/JavaScript" src="{% static 'admin/js/html5.js' %}"></script>
+    <script type="text/javascript" src="../../static/js/ie6.js"></script>{% endcomment %}
+    <script type="text/JavaScript" src="{% static 'admin/js/jquery.js' %}"></script>
+     <script type="text/JavaScript" src="{% static 'js2/detail.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js2/test.js' %}"></script>
+    <script type="text/javascript"   src="{% static 'js/common.js' %}"></script>
+
+
+
+</head>
+<body>
+    <div class="header_con">
+		<div class="header">
+			<div class="welcome fl">欢迎来到图书商城</div>
+			<div class="fr">
+				<div class="login_btn fl">
+					{% if userinfo.islogin %}
+					欢迎您：<em>{{ userinfo.username }}</em>
+					<span>|</span>
+					<a href="{% url 'bUser :logout' %}">退出</a>
+					{% else %}
+					<a href="{% url 'bUser :login' %}">登录</a>
+					<span>|</span>
+					<a href="{% url 'bUser :register' %}">注册</a>
+					{% endif %}
+				</div>
+				<div class="user_link fl">
+					<span>|</span>
+					<a href="{% url 'bUser :personalinfo' %}">用户中心</a>
+					<span>|</span>
+					<a href="{% url 'bShop:showcart' %}">我的购物车</a>
+					<span>|</span>
+					<a href="#">我的订单</a>
+				</div>
+			</div>
+		</div>
+     </div>
+    <div class="search_bar clearfix">
+		<a href="{% url 'bShop:index' %}" class="logo fl"><img src="{% static '/images/logo.png' %}"></a>
+		<div class="search_con fl">
+			<input type="text" class="input_text fl" name="" placeholder="搜索商品">
+			<input type="button" class="input_btn fr" name="" value="搜索">
+		</div>
+		<div class="guest_cart fr">
+			<a href="{% url 'bShop:showcart' %}" class="cart_name fl">我的购物车</a>
+			<div class="goods_count fl" id="show_count">0</div>
+		</div>
+	</div>
+
+     <div class="navbar_con">
+		<div class="navbar">
+			<h1 class="fl">全部商品分类</h1>
+            <span></span>
+
+
+		</div>
+	</div>
+     <div class="breadcrumb">
+		<a href="#">全部分类</a>
+		<span>></span>
+		<a href="#">{{ category.kind }}</a>
+		<span>></span>
+		<span>商品详情</span>
+	</div>
+    <div class="goods_detail_con clearfix">
+       <!--产品简介-->
+        <div id="product_intro">
+            <div id="preview">
+                <p id="medimImgContainer">
+                    {% with imgl=product.pdImage%}
+                          <img id="mediumImg" src="{{ imgl}}"/>
+                    {% endwith %}
+                    <span id="mask"></span><!--小黄块-->
+                    <span id="maskTop"></span><!--悬于图片/mask上方的专用于接收鼠标移动事件的一个完全透明的层-->
+                     <span id="largeImgContainer">
+                        <img id="loading" src="{% static 'images/loading.gif' %}"/>
+                        <img id="largeImg"/>
+                     </span>
+                  </p>
+                 <h1>
+                    <a class="backward_disabled"></a>
+                    <a class="forward_disabled"></a>
+                    <div>
+                        <ul id="icon_list">
+                            {% for item in imglist  %}
+                                <li><img src="{{ item }}"/></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                 </h1>
+            </div>
+            <form method="post" action="#">
+                {% csrf_token %}
+             	<div class="goods_detail_list fr">
+                    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+                       <input type="hidden" name="pid[]" value="{{ product.pid }}">
+                    <h3>{{ product.pdname}}</h3>
+                    <div class="prize_bar">
+                        <span class="show_pirze2">¥<em id="danjia">{{ price }}</em><em>({{  product.discount}}折)</em></span>
+                        <span class="show_pirze">定价: ¥<em>{{ product.pdprice }}</em></span>
+                     </div>
+                     <div class="goods_num clearfix">
+                         <div class="num_name fl">数 量：</div>
+                            <div class="num_add fl">
+                                <input type="text" class="num_show_{{ product.pid }} fl" id="shuliang" value="1">
+                                <a href="javascript:;" class="add fr" id="jiahao">+</a>
+                                <a href="javascript:;"  class="minus fr" id="jianhao">-</a>
+				            </div>
+			            </div>
+                       <div class="total">总价：<em class="price{{  product.pid  }} " id="zongjia" >{{ price }}</em> <em>元</em></div>
+                        <div class="operate_btn">
+				            <a href="#" class="buy_btn">立即购买</a>
+				            <a href="javascript:;"  class="add_cart" id="add_cart">加入购物车<i class="cart"></i></a>
+			            </div>
+                      </div>
+
+            </form>
+      </div>
+
+
+
+        </div>
+
+	</div>
+
+{#    图书展区#}
+    <div class="product_content clearfix">
+        {#    右边主体#}
+        <div id="right-content" class="main">
+            <div id="buyTogether" class="group_buy" dd_name="最佳拍档">
+                <ul class="tab clearfix">
+                    <li class="hover" data-type="buyTogether">产品介绍</li>
+                </ul>
+                 <div class="over">
+                     <span>{{ product.pdInfo }}</span>
+
+                </div>
+
+            </div>
+
+
+        </div>
+        {#    左侧主体#}
+        <div class="aside">
+            <div id="alsoVies" class="abox">
+                <h3>同类型推荐</h3>
+                <ul class="none_b listo1 list_alsoview">
+                    {% for book in books%}
+                        {% if book.pid != product.pid%}
+                    <li>
+                     {% with imgl=book.pdImage %}
+                        <p class="pic">
+                            <a href="{% url 'bShop:detail' %}?pid={{ book.pid }}" target="_blank">
+                                <img src="{{ imgl }}" alt="">
+                            </a>
+                        </p>
+                     {% endwith %}
+                        <p class="price">
+                            <span class="price_d">¥{{ book.pdprice }}</span>
+                        </p>
+                        <p class="name">
+                            <p class="pdname">{{ book.pdname }}</p>
+                        </p>
+                        <p class="bottom_product"></p>
+                    </li>
+                        {% endif %}
+                    {% endfor %}
+
+                </ul>
+            </div>
+
+        </div>
+
+
+    </div>
+     <div class="footer_nav_box">
+        <div class="footer_nav">
+            <a href="#" target="_blank" rel="nofollow">公司简介</a>
+            <span class="sep">|</span>
+            <a href="#" target="_blank">诚聘英才</a>
+            <span class="sep">|</span>
+            <a href="#" target="_blank">图书商城</a>
+            <span class="sep">|</span>
+            <a href="#" target="_blank">网站联盟</a>
+            <span class="sep">|</span>
+            <a href="#" target="_blank">官方Blog</a>
+        </div>
+        <div class="footer_copyright">
+            <span>Copyright (C) 当当网 2004-2017, All Rights Reserved</span>
+        </div>
+
+        <!-- 有三个icon的时候加footer_icon2 -->
+{#        <div class="footer_icon footer_icon2" style="padding-left: 55px;">#}
+{#            <div class="validator"><a href="#" target="_blank" class="footer_img"><img src="../../static/images/validate.gif"></a></div>#}
+{#            <div class="validator"><a href="#" target="_blank" class="footer_img"><img src="../../static/images/validate.gif"></a></div>#}
+{#            <div class="validator"><a id="_pingansec_bottomimagesmall_brand" href="#"  target="_blank"><img src="../../static/images/validate.gif"></a></div>#}
+{#        </div>#}
+        <div class="clear"></div>
+    </div>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/foot.css">
+     <link rel="stylesheet" type="text/css" href="/static/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/showcat.css">
+    <script src="{% static 'admin/js/html5.js' %}"></script>
+    <script type="text/javascript" src="../../static/js/ie6.js"></script>
+    <script src="{% static 'admin/js/jquery.js' %}"></script>
+     <script type="text/javascript"   src="{% static 'js/common.js' %}"></script>
+     <script type="text/javascript"   src="{% static 'js2/ShowCat.js' %}"></script>
+   <script>
+       function addgoods(id) {
+           var cookieop = new cookieOperate();
+           var csrf = cookieop.getCookie('csrftoken');
+           $.ajax({
+                    url: '/shop/addgoods1/',
+                    type: 'POST',
+                     data: {'product_pid': id},
+
+                     beforeSend: function (request) {
+                            request.setRequestHeader("X-CSRFToken", csrf);
+                        },
+                     success: function (data) {
+                       window.location = window.location;
+                   },
+                    error:function (data) {
+                      alert("失败")
+                    }
+                 });
+            }
+            function subgoods(id) {
+           var cookieop = new cookieOperate();
+           var csrf = cookieop.getCookie('csrftoken');
+           $.ajax({
+                    url: '/shop/subgoods1/',
+                    type: 'POST',
+                     data: {'product_pid': id},
+
+                     beforeSend: function (request) {
+                            request.setRequestHeader("X-CSRFToken", csrf);
+                        },
+                     success: function (data) {
+                       window.location = window.location;
+                   },
+                    error:function (data) {
+                      alert("亲，别删光啊")
+                    }
+                 });
+            }
+   </script>
+    <script>
+           $(function () {
+               $('#jiesuan').click(function () {
+                    var cartlist ="";
+               $('.onecheck:checked').each(function(i) {
+                    cartlist+= parseFloat($(this).parents("ul ").find('.cat_cid').val());
+                    cartlist+="#"
+                 })
+                   $('#cartlist').val(cartlist);
+                    $('#payform').submit();
+               });
+           });
+    </script>
+</head>
+<body>
+    <div class="header_con">
+		<div class="header">
+			<div class="welcome fl">欢迎来到图书商城</div>
+			<div class="fr">
+				<div class="login_btn fl">
+					{% if userinfo.islogin %}
+					欢迎您：<em>{{ userinfo.username }}</em>
+					<span>|</span>
+					<a href="{% url 'bUser :logout' %}">退出</a>
+					{% else %}
+					<a href="{% url 'bUser :login' %}">登录</a>
+					<span>|</span>
+					<a href="{% url 'bUser :register' %}">注册</a>
+					{% endif %}
+				</div>
+				<div class="user_link fl">
+					<span>|</span>
+					<a href="{% url 'bUser :personalinfo' %}">用户中心</a>
+					<span>|</span>
+				    <a href="{% url 'bShop:showcart' %}">我的购物车</a>
+					<span>|</span>
+					<a href="#">我的订单</a>
+				</div>
+			</div>
+		</div>
+     </div>
+    <div class="search_bar clearfix">
+		<a href="{% url 'bShop:index' %}" class="logo fl"><img src="{% static '/images/logo.png' %}"></a>
+		<div class="sub_page_name fl">|&nbsp;&nbsp;&nbsp;&nbsp;购物车</div>
+	</div>
+    <div class="total_count">全部商品<em>{{ allcartnum }}</em>种</div>
+    <ul class="cart_list_th clearfix">
+		<li class="col01">商品名称</li>
+		<li class="col02">商品定价</li>
+        <li class="col03">商品折扣</li>
+		<li class="col04">数量</li>
+		<li class="col05">小计</li>
+		<li class="col06">操作</li>
+	</ul>
+     <form id="payform" method="post" action="{% url 'bShop:cash_pay' %}" id="cartform">
+     {% csrf_token %}
+     <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+      {% for cat in allcart %}
+    <ul class="cart_list_td clearfix" id="436">
+        <li class="col01"><input type="checkbox" class="onecheck" checked ></li>
+
+                 <input type="hidden" name="pid[]"  value="{{ cat.product_id }}">
+                   <input type="hidden" class="cat_cid"  value="{{ cat.cid }}">
+                  <li class="col02">  <img src="{{ cat.product.pdImage }}"></li>
+                  <li class="col03">{{ cat.product.pdname}}</li>
+                  <li class="col04">{{ cat.product.pdprice }}元</li>
+                   <li class="col05">{{ cat.product.discount}}折</li>
+                    <li class="col06">
+			     <div class="num_add">
+                 <a href="javascript:;"   class="add fl" onclick="addgoods({{ cat.product_id }})">+</a>
+                <input type="text" class="num_show  fl" value="{{ cat.pnum }}">
+				<a href="javascript:;"  class="minus fl" onclick="subgoods({{ cat.product_id  }})">-</a>
+			</div>
+		    </li>
+    <li class="col07"><em id="price">{{ cat.sumprice }} </em>元</li>
+    <li class="col08"><a href="{% url 'bShop:deletcart' %}?pid={{ cat.product_id }}">删除</a></li>
+	</ul>
+    {% endfor %}
+         <input type="text" id="cartlist" name="cartlist" value="">
+    <ul class="settlements">
+		<li class="col01"><input type="checkbox" id="allcheck" checked  ></li>
+		<li class="col02">全选</li>
+		<li class="col03">合计(包邮)：<span>¥</span><em id="zong">0</em> <br>共计<b id="zongshu"></b>件商品</li>
+		<li class="col04"><a href="javascript:;" id="jiesuan" style="background-color: rgb(255, 61, 61);">去结算</a></li>
+	</ul>
+     </form>
+   <div class="center_con clearfix">
+     <div class="footer_nav_box">
+        <div class="footer_nav">
+            <a href="#" target="_blank" rel="nofollow">公司简介</a>
+            <span class="sep">|</span>
+            <a href="#" target="_blank">诚聘英才</a>
+            <span class="sep">|</span>
+            <a href="#" target="_blank">图书商城</a>
+            <span class="sep">|</span>
+            <a href="#" target="_blank">网站联盟</a>
+            <span class="sep">|</span>
+            <a href="#" target="_blank">官方Blog</a>
+        </div>
+        <div class="footer_copyright">
+            <span>Copyright (C) 当当网 2004-2017, All Rights Reserved</span>
+        </div>
+        <div class="clear"></div>
+     </div>
+    </div>
+
+   <script>
+     $(function () {
+        $("#allcheck").click(function() {
+        var flag = $(this).prop("checked");
+        if(flag) {
+            $(".onecheck").prop("checked", true);
+        } else {
+            $(".onecheck").prop("checked", false);
+
+        }
+        totalPrice();
+        counts();
+      });
+
+        //单选
+    $(".onecheck").click(function() {
+
+        var CL = $(".onecheck").length; //列表长度；
+        var CH = $(".onecheck:checked").length; //列表中被选中的长度
+
+        if(CL == CH) {
+            $("#allcheck").prop("checked", true);
+
+        } else {
+            $("#allcheck").prop("checked", false);
+
+        }
+
+        totalPrice();
+        counts();
+    })
+         //总价格
+    totalPrice();
+
+    function totalPrice() {
+        var prices = 0;
+        $('.onecheck:checked').each(function(i) {
+            console.log()
+            prices += parseFloat($(this).parents("ul ").find('#price').text());
+        })
+        $('#zong').text(prices);
+    }
+
+    //总数目
+    counts();
+
+    function counts() {
+        var sum = 0;
+        $('.onecheck:checked').each(function(i) {
+            sum += parseInt($(this).parents("ul").find('.num_show').val());
+        })
+        $('#zongshu').text(sum);
+    }
+
+ });
+
+   </script>
+
+</body>
+</html>
+

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+     <link rel="shortcut icon" href="/static/images/favicon.ico" type="image/x-icon">
+     <link rel="stylesheet" type="text/css" href="/static/css/base.css">
+     <link rel="stylesheet" type="text/css" href="/static/css/foot.css">
+     <link rel="stylesheet" type="text/css" href="/static/css/register.css">
+     <script type="text/javascript" src="../../static/js/jquery-3.3.1.js"></script>
+     <script type="text/javascript" src="../../static/js/register.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/css/foot.css">
+     <script src="{% static 'admin/js/html5.js' %}"></script>
+    <title>注册 -- 图书网</title>
+</head>
+<body>
+
+    <div class="ddnewhead_wrap">
+        <div class="ddnewhead_content">
+            <div class="ddnewhead_logo">
+                <a  href="#" title="返回首页">
+                    <img src="../../static/images/logo1.png" alt="">
+                </a>
+            </div>
+            <div class="ddnewcarthead_bottom"></div>
+        </div>
+    </div>
+    <form  id='reFrom' action="{% url 'bUser :register' %}"  method="post">
+        {% csrf_token %}
+        <div id="bd">
+            <div class="shadow_box">
+                <div class="register_box">
+                    <div class="head">
+                        <span class="dd_more">
+                            <a  class="home" href="{% url 'bShop:index' %}">网站首页</a>
+                        </span>
+                        <a  class="head_a" href="#">新用户注册</a>
+                    </div>
+                    <div class="body">
+                        <div id="J_cheatProofTop" class="new_tip" style="display: block">
+                            <div>贴心提示：请勿设置与邮箱密码相同的账户登录密码或支付密码，防止不法分子窃取您的当当账户信息，<a href="#">谨慎诈骗</a></div>
+
+                        </div>
+                        <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                            <tbody>
+                            <tr>
+                                <td class="t">用户名 </td>
+                                <td class="z_index2">
+                                    <input name="txt_username" id="txt_username" autocomplete="off" maxlength="40" tabindex="1" value="" placeholder="请输入您的手机号码" type="text" class="text">
+                                    <span id="J_tipUsername" class="cue warn"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="t">登录密码</td>
+                                <td class="z_index2">
+                                    <input name="txt_password" id="txt_password"  type="password" autocomplete="off" maxlength="40" tabindex="1" value="" placeholder="请输入您的登录密码" type="text" class="text">
+                                    <span id="J_tipPassword" class="cue warn"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="t">确认密码</td>
+                                <td class="z_index2">
+                                    <input name="txt_check_password" id="txt_check_password" type="password" autocomplete="off" maxlength="40" tabindex="1" value="" placeholder="请再次确认你的密码" type="text" class="text">
+                                     <span id="J_tipSurePassword" class="cue warn"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="t">邮 箱</td>
+                                <td class="z_index2">
+                                    <input name="txt_email" id="txt_email" autocomplete="off" maxlength="40" tabindex="1" value="" placeholder="请输入你的邮箱" type="text" class="text">
+                                     <span id="J_tipEmail" class="cue warn"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="t"></td>
+                                <td class="clause">
+                                    <span class="float_l">
+                                         <input id="chb_agreement"  name="chb_agreement"type="checkbox"tabindex="7" checked="checked">
+                                            我已阅读并同意《协议》
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="t"></td>
+                                <td><input id="J_submitRegister" class="btn_login" type="button" value="立即注册"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="footer_nav_box">
+        <div class="footer_nav">
+            <a href="#" target="_blank" rel="nofollow">公司简介</a>
+            <span class="sep">|</span>
+            <a href="#" target="_blank">诚聘英才</a>
+            <span class="sep">|</span>
+            <a href="#" target="_blank">手机当当</a>
+            <span class="sep">|</span>
+            <a href="#" target="_blank">网站联盟</a>
+            <span class="sep">|</span>
+            <a href="#" target="_blank">官方Blog</a>
+        </div>
+        <div class="footer_copyright">
+            <span>Copyright (C) 当当网 2004-2017, All Rights Reserved</span>
+        </div>
+
+        <!-- 有三个icon的时候加footer_icon2 -->
+{#        <div class="footer_icon footer_icon2" style="padding-left: 55px;">#}
+{#            <div class="validator"><a href="#" target="_blank" class="footer_img"><img src="../../static/images/validate.gif"></a></div>#}
+{#            <div class="validator"><a href="#" target="_blank" class="footer_img"><img src="../../static/images/validate.gif"></a></div>#}
+{#            <div class="validator"><a id="_pingansec_bottomimagesmall_brand" href="#"  target="_blank"><img src="../../static/images/validate.gif"></a></div>#}
+{#        </div>#}
+        <div class="clear"></div>
+    </div>
+</body>
+</html>

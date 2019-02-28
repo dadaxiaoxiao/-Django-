@@ -1,0 +1,180 @@
+.common_title {
+    width: 1200px;
+    margin: 20px auto 0;
+    font-size: 14px;
+}
+.common_list_con {
+    width: 1200px;
+    border: 1px solid #dddddd;
+    border-top: 2px solid #ff2832;
+    margin: 10px auto 0;
+    background-color: #f7f7f7;
+    position: relative;
+}
+.common_list_con dl {
+    margin: 20px;
+}
+.common_list_con dt {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+dt {
+    display: block;
+}
+dd {
+    display: block;
+    margin-inline-start: 40px;
+}
+.common_list_con dd input {
+    vertical-align: bottom;
+    margin-right: 10px;
+}
+.edit_site {
+    position: absolute;
+    right: 20px;
+    top: 30px;
+    width: 100px;
+    height: 30px;
+    background-color:#ff2832;
+    text-align: center;
+    line-height: 30px;
+    color: #fff;
+}
+
+.common_list_con {
+    width: 1200px;
+    border: 1px solid #dddddd;
+    border-top: 2px solid #ff2832;
+    margin: 10px auto 0;
+    background-color: #f7f7f7;
+    position: relative;
+}
+.pay_style_con {
+    margin: 20px;
+}
+.pay_style_con label {
+    float: left;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    padding: 10px 10px 10px 40px;
+    margin-right: 25px;
+}
+.pay_style_con input {
+    float: left;
+    margin: 14px 7px 0 0;
+}
+.pay_style_con .cash {
+    background: url('../images/pay_icons.png') 8px top no-repeat #fff;
+}
+.pay_style_con .weixin {
+    background: url('../images/pay_icons.png') 6px -36px no-repeat #fff;
+}
+.pay_style_con .zhifubao {
+    background: url('../images/pay_icons.png') 12px -72px no-repeat #fff;
+    width: 50px;
+    height: 16px;
+}
+.pay_style_con .bank {
+    background: url('../images/pay_icons.png') 6px -108px no-repeat #fff;
+}
+.goods_list_th {
+    height: 40px;
+    border-bottom: 1px solid #ccc;
+}
+.goods_list_th .col01 {
+    width: 25%;
+}
+.goods_list_th li {
+    float: left;
+    line-height: 40px;
+    text-align: center;
+}
+.goods_list_th .col02 {
+    width: 20%;
+}
+.goods_list_th .col03 {
+    width: 25%;
+}
+.goods_list_th .col04 {
+    width: 15%;
+}
+.goods_list_th .col05 {
+    width: 15%;
+}
+.goods_list_td li {
+    float: left;
+    line-height: 80px;
+    text-align: center;
+}
+.goods_list_td .col02 {
+    text-align: right;
+}
+.goods_list_td .col02 {
+    width: 6%;
+}
+.goods_list_td .col02 img {
+    width: 63px;
+    height: 63px;
+    border: 1px solid #ddd;
+    display: block;
+    margin: 7px 0;
+    float: right;
+}
+.goods_list_td .col03 {
+    text-align: left;
+    text-indent: 22px;
+}
+.goods_list_td .col03 {
+    width: 18%;
+}
+.goods_list_td .col04 {
+    width: 20%;
+}
+.goods_list_td .col05 {
+    width: 25%;
+}
+.goods_list_td .col06 {
+    width: 15%;
+}
+.goods_list_td .col07 {
+    width: 15%;
+}
+.goods_list_td {
+    height: 80px;
+    width: 1203px;
+    border-bottom: 1px solid #eeeded;
+    margin: 0 auto;
+}
+.settle_con {
+    margin: 10px;
+}
+.total_goods_count, .transit, .total_pay {
+    line-height: 24px;
+    text-align: right;
+}
+.total_goods_count em, .total_goods_count b,.transit b, .total_pay b {
+    font-size: 14px;
+    color: #ff4200;
+    padding: 0 5px;
+}
+.total_goods_count em, .total_goods_count b, .transit b, .total_pay b {
+    font-size: 14px;
+    color: #ff4200;
+    padding: 0 5px;
+}
+.order_submit {
+    width: 1200px;
+    margin: 20px auto;
+}
+.order_submit a {
+    width: 160px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    background-color: #ff2832;
+    color: #fff;
+    font-size: 16px;
+    display: block;
+    float: right;
+}

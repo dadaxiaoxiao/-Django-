@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/foot.css">
+     <link rel="stylesheet" type="text/css" href="/static/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/showcat.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/pay.css">
+
+    <script src="{% static 'admin/js/html5.js' %}"></script>
+    <script type="text/javascript" src="../../static/js/ie6.js"></script>
+    <script src="{% static 'admin/js/jquery.js' %}"></script>
+
+
+</head>
+
+<body>
+    <div class="header_con">
+		<div class="header">
+			<div class="welcome fl">欢迎来到图书商城</div>
+			<div class="fr">
+				<div class="login_btn fl">
+					{% if userinfo.islogin %}
+					欢迎您：<em>{{ userinfo.username }}</em>
+					<span>|</span>
+					<a href="{% url 'bUser :logout' %}">退出</a>
+					{% else %}
+					<a href="{% url 'bUser :login' %}">登录</a>
+					<span>|</span>
+					<a href="{% url 'bUser :register' %}">注册</a>
+					{% endif %}
+				</div>
+				<div class="user_link fl">
+					<span>|</span>
+					<a href="{% url 'bUser :personalinfo' %}">用户中心</a>
+					<span>|</span>
+					<a href="{% url 'bShop:showcart' %}">我的购物车</a>
+					<span>|</span>
+					<a href="#">我的订单</a>
+				</div>
+			</div>
+		</div>
+     </div>
+      <div class="search_bar clearfix">
+		<a href="{% url 'bShop:index' %}" class="logo fl"><img src="{% static '/images/logo.png' %}"></a>
+		<div class="sub_page_name fl">|&nbsp;&nbsp;&nbsp;&nbsp;支付生成订单</div>
+	</div>
+    <h3 class="common_title">确认收货地址</h3>
+    <div class="common_list_con clearfix">
+		<dl>
+			<dt>寄送到：</dt>
+			<dd><input type="radio" name="" checked="">{{ curaddress }}</dd>
+		</dl>
+		<a href="{% url 'bUser :adress'%}" class="edit_site">编辑收货地址</a>
+	</div>
+    <h3 class="common_title">支付方式</h3>
+    <div class="common_list_con clearfix">
+		<div class="pay_style_con clearfix">
+			<input type="radio" name="pay_style" checked="">
+			<label class="cash">货到付款</label>
+			<input type="radio" name="pay_style">
+			<label class="weixin">微信支付</label>
+			<input type="radio" name="pay_style">
+			<label class="zhifubao"></label>
+			<input type="radio" name="pay_style">
+			<label class="bank">银行卡支付</label>
+		</div>
+	</div>
+    <h3 class="common_title">商品列表</h3>
+    <div class="common_list_con clearfix">
+		<ul class="goods_list_th clearfix">
+			<li class="col01">商品名称</li>
+			<li class="col02">商品定价</li>
+			<li class="col03">商品折扣</li>
+			<li class="col04">数量</li>
+			<li class="col05">小计</li>
+		</ul>
+	</div>
+
+
+    {% for cat in allcart %}
+        {% for clist in Clists %}
+            {% if cat.cid == clist.cart_id %}
+        <ul class="goods_list_td clearfix" id="461">
+			<li class="col01">{{ forloop.counter }}</li>
+			<li class="col02"><img class="imgl" src="{{ cat.product.pdImage }}"></li>
+			<li class="col03"> {{ cat.product.pdname}}</li>
+			<li class="col04">{{ cat.product.pdprice }}</li>
+			<li class="col05">{{ cat.product.discount }}</li>
+			<li class="col06"><em class="num">{{ cat.pnum }}</em></li>
+			<li class="col07"><em class="price">{{ cat.sumprice }}</em>元</li>
+		</ul>
+            {% endif %}
+            {% endfor %}
+    {% endfor %}
+    <h3 class="common_title">总金额结算</h3>
+    <div class="common_list_con clearfix">
+		<div class="settle_con">
+			<div class="total_goods_count">共<em id="shuliang">0</em>件商品，商品总金额<b id="zong">0元</b></div>
+			<div class="transit">运费：<b>包邮</b></div>
+			<div class="total_pay">应付款：<b id="fu">0元</b></div>
+		</div>
+	</div>
+    <div class="order_submit clearfix">
+		<a href="javascript:;" id="order_btn">支付</a>
+	</div>
+     <div class="center_con clearfix">
+     <div class="footer_nav_box">
+        <div class="footer_nav">
+            <a href="#" target="_blank" rel="nofollow">公司简介</a>
+            <span class="sep">|</span>
+            <a href="#" target="_blank">诚聘英才</a>
+            <span class="sep">|</span>
+            <a href="#" target="_blank">图书商城</a>
+            <span class="sep">|</span>
+            <a href="#" target="_blank">网站联盟</a>
+            <span class="sep">|</span>
+            <a href="#" target="_blank">官方Blog</a>
+        </div>
+        <div class="footer_copyright">
+            <span>Copyright (C) 当当网 2004-2017, All Rights Reserved</span>
+        </div>
+
+        <!-- 有三个icon的时候加footer_icon2 -->
+{#        <div class="footer_icon footer_icon2" style="padding-left: 55px;">#}
+{#            <div class="validator"><a href="#" target="_blank" class="footer_img"><img src="../../static/images/validate.gif"></a></div>#}
+{#            <div class="validator"><a href="#" target="_blank" class="footer_img"><img src="../../static/images/validate.gif"></a></div>#}
+{#            <div class="validator"><a id="_pingansec_bottomimagesmall_brand" href="#"  target="_blank"><img src="../../static/images/validate.gif"></a></div>#}
+{#        </div>#}
+        <div class="clear"></div>
+     </div>
+    </div>
+
+<script>
+     $(function () {
+
+         //总价格
+    totalPrice();
+
+    function totalPrice() {
+        var prices = 0;
+        $('.imgl').each(function(i) {
+            console.log()
+            prices += parseFloat($(this).parents("ul ").find('.price').text());
+        })
+        $('#zong').text(prices);
+        $('#fu').text(prices);
+    }
+
+    //总数目
+    counts();
+
+    function counts() {
+        var sum = 0;
+        $('.imgl').each(function(i) {
+            sum += parseInt($(this).parents("ul").find('.num').text());
+        })
+        $('#shuliang').text(sum);
+    }
+
+
+
+
+
+
+ });
+
+   </script>
+
+</body>
+</html>
+

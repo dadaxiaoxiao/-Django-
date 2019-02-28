@@ -1,0 +1,2 @@
+.lt_aside_nav dl dd .active1{background:#f8f8f8;color:#19a97b;}
+.lt_aside_nav dl dd .active1:after{content:">";font-family:'adminthemesregular';position:absolute;right:3%;color:#19a97b;}

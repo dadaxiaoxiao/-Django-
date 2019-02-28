@@ -1,0 +1,134 @@
+.head {
+    margin: 12px auto 14px;
+    width: 1200px;
+    height: 60px;
+}
+
+.head a{
+    display: block;
+
+}
+.head img{
+    width: 147px;
+    height: 42px;
+    float: left;
+    margin: 7px 0 0 0;
+}
+.login_bg{
+    background: url("../images/login_bgk.jpg") no-repeat center center ;
+    height: 590px;
+}
+.login_bg .set_area {
+    width: 1200px;
+    margin: 0 auto;
+    position: relative;
+}
+.wrap {
+    background: #fff;
+    padding: 15px 25px 15px 15px;
+    float: right;
+    width: 320px;
+    color: #6e6e6e;
+    margin: 90px auto 0;
+    position: relative;
+    border: 1px solid #eef2f4;
+   box-shadow: 0px 1px 2px #eee; /*盒子阴影*/
+}
+.wrap a, .wrap a:hover {
+    color: #1a66b3;
+}
+#J_cheatProoTop{
+    display: block;
+    width: 339px;
+    height: 24px;
+    right: -1px;
+    top: -27px;
+}
+.new_tip{
+    line-height: 24px;
+    color: #828282;
+    padding-left: 22px;
+    background: url("../images/new_tip.png") 3px 5px no-repeat #fef7f5;
+    border: 1px solid #fedbd1;
+    position: absolute;
+    right: 0;
+}
+.infro{
+    display: block;
+    position: relative;
+    width: 311px;
+    float: right;
+}
+.password_login{
+    font-size: 18px;
+    color: #3c3c3c;
+    margin-top: 5px;
+}
+.infro .username{
+    margin-top: 20px;
+
+}
+.infro .username,.infro .password {
+    height: 36px;
+    border: 1px solid #e6e6e6;
+    width: 310px;
+    border-radius: 2px;
+    position: relative;
+}
+.infro .username span,.infro .password span{
+    width: 30px;
+    margin-right: 10px;
+    height: 36px;
+    float: left;
+    background: url("../images/tu1.png") 10px -110px no-repeat;
+}
+.infro .password span {
+    background-position: 10px -150px;
+}
+.tips {
+    height: 30px;
+    line-height: 30px;
+    padding-left: 10px;
+    color: red;
+}
+
+.auto_login{
+    width: 310px;
+    height: 27px;
+    line-height: 22px;
+    padding-top: 7px;
+    overflow: hidden;
+}
+.auto_login a {
+    float: right;
+}
+.wrap input {
+    outline: none;
+}
+.auto_login input {
+    vertical-align: middle;
+    margin-top: -1px;
+}
+.infro .username input, .infro .password input, .infro .code input {
+    float: left;
+    height: 34px;
+    line-height: 34px;
+    border: 0;
+    color: #333;
+    padding: 0;
+}
+
+.infro .btn #submintLoginBtn {
+    width: 100%;
+    line-height: 44px;
+    border-radius: 5px;
+    color: #fff;
+    display: inline-block;
+    height: 44px;
+    text-align: center;
+    background: #ff2832;
+    font-size: 20px;
+}
+#J_cheatProoTop{
+    font-size: 12px;
+}

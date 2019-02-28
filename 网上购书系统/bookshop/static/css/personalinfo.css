@@ -1,0 +1,54 @@
+.my_main {
+    width: 990px;
+    padding: 0 0 0 10px;
+    height: 600px;
+    float: left;
+    display: block;
+}
+.my_title {
+    height: 48px;
+    line-height: 48px;
+    background: #fafafa;
+    border: 1px solid #dcdcdc;
+    overflow: hidden;
+}
+.my_title .title {
+    margin: 15px 0 15px 10px;
+    padding: 0 0 0 10px;
+    font-size: 16px;
+    color: #323232;
+    line-height: 18px;
+    border-left: 2px solid #ff2832;
+    display: inline-block;
+}
+.address_list {
+    border: 1px solid #d9d9d9;
+    border-top: none 0;
+    padding: 30px 0 60px 25px;
+    margin-bottom: 20px;
+    width: 900px;
+    height: 100px;
+}
+.address_list h3{
+    font-size: 15px;
+}
+.address_list dl{
+    margin: 8px 0;
+    line-height: 16px;
+    font-size: 12px;
+    padding-left: 27px;
+}
+.address_list dl dt{
+    color: #969696;
+    font-size: 14px;
+    padding-top: 10px;
+}
+.address_list dl dd{
+    color: #969696;
+    padding-top: 18px;
+    padding-left: 28px;
+    font-size: 14px;
+}
+#a_personal{
+    color: red;
+}
